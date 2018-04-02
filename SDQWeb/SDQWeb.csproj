@@ -325,6 +325,7 @@
       <DependentUpon>SdqModel.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap-material-design.js.map" />
+    <None Include="Properties\PublishProfiles\SDQWeb20180402113404 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
