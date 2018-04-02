@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e8a8a3dfb854f7eb00bbc644ae4d699" Name="Diagram1" ZoomLevel="43">
+        <EntityTypeShape EntityType="SDQModel.Address" Width="1.5" PointX="3" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Announcement" Width="1.5" PointX="5.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Assignment" Width="1.5" PointX="13.875" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Country" Width="1.5" PointX="0.75" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Coursse" Width="1.5" PointX="6.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Depertment" Width="1.5" PointX="8.25" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Discussion" Width="1.5" PointX="12.75" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.ExamSchedule" Width="1.5" PointX="10.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Institute" Width="1.5" PointX="11.25" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Material" Width="1.5" PointX="13.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Note" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Post" Width="1.5" PointX="10.5" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.PresentAddress" Width="1.5" PointX="6" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Quise" Width="1.5" PointX="24" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Report" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Routine" Width="1.5" PointX="12.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Schedule" Width="1.5" PointX="12.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Session" Width="1.5" PointX="22.125" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.SessionQuise" Width="1.5" PointX="24.125" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Student" Width="1.5" PointX="10.5" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.StudentCourse" Width="1.5" PointX="15.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.StudentDepertment" Width="1.5" PointX="13.75" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Teacher" Width="1.5" PointX="10.5" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.TeacherCourse" Width="1.5" PointX="13.75" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.TeacherDepertment" Width="1.5" PointX="12.75" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.User" Width="1.5" PointX="8.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.UserInstitute" Width="1.5" PointX="16.5" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDQModel.Zip" Width="1.5" PointX="0.75" PointY="26.5" IsExpanded="true" />
+        <AssociationConnector Association="SDQModel.FK_Address_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Address_Zip" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Depertment_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Institute_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_User_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Announcement_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Assignment_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_PresentAddress_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Course_Depertment" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_ExamSchedule_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Report_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Routine_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Schedule_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Session_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_StudentCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_TeacherCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Depertment_Institute" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_StudentDepertment_Depertment" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_TeacherDepertment_Depertment" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Discussion_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Discussion_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Institute_PresentAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_UserInstitute_Institute" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Session_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Notes_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Post_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_PresentAddress_Zip" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_User_PresentAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_SessionQuise_Quise" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_SessionQuise_Session" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Student_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_StudentCourse_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_StudentDepertment_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_Teacher_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_TeacherCourse_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_TeacherDepertment_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="SDQModel.FK_UserInstitute_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

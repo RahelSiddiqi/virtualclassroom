@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SDQWeb.Models.UserInstitute>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("As Student", "Create", "Students")
+    @Html.ActionLink("As Teacher", "Create", "Teachers")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Institute Name
+        </th>
+        <th>
+            Estd. Date
+        </th>
+        <th>
+            Web Site
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Institute.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Institute.EstDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Institute.WebSite)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+
+        </td>
+    </tr>
+}
+
+</table>

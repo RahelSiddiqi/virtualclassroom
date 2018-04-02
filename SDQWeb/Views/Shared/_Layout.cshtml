@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <!-- fonts for menu -->
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn:400,700" rel="stylesheet">
+    <!-- fonts for posts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400" rel="stylesheet">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <link href="~/Content/bootstrap-material-design.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-material-design.min.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+</head>
+<body>
+<header class="navbar navbar-expand navbar-dark fixed-top backgroundGreen">
+    <div class="container">
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link active" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="">Campus</a>
+                </li>
+                <li class="nav-item">
+                    @{ 
+                        int id = Convert.ToInt16(Session["id"]);
+                        var usrtcr = new SDQWeb.Models.SDQEntities().Teachers.Where(t => t.UserId == id).FirstOrDefault();
+                        if (usrtcr != null)
+                        {
+                            <a class="nav-link " href="~/Coursses/Index/@Session["id"]">Campus</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link " href="~/Coursses/Index/@Session["id"]">Campus</a>
+                        }
+                    }
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="">Networks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="">Blogs</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <li class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown" href="#" id="Networks" data-toggle="dropdown">
+                    Notifications
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item active" href=""><i class="fas fa-bell iconsAdjust"></i>Reminders</a>
+                    <a class="dropdown-item " href=""><i class="fas fa-object-group iconsAdjust"></i>Sections</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-users iconsAdjust"></i>Friends</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-tasks iconsAdjust"></i>Routines</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-sticky-note iconsAdjust"></i>Notes</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-puzzle-piece iconsAdjust"></i>Queries</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown" href="#" id="Profile" data-toggle="dropdown">@Session["fname"] @Session["lname"]</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item active" href=""><i class="fas fa-pencil-alt iconsAdjust"></i>Edit Profile</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-wrench iconsAdjust"></i>Update</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-sign-in-alt iconsAdjust"></i>Join</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-cogs iconsAdjust"></i>Setting</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-pause iconsAdjust"></i>Logout</a>
+                </div>
+            </li>
+            <li>
+                <a href="/Users/Details/@Session["id"]"><img class="img-circle" src="~/Image/@Session["image"]" height="40" /></a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="container MarginTop">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+            <div class="container  MainBodySideBar">
+                <div id="accordion SideBarTopMargin">
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5>
+                                Facultry & Friends
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="show FixedHeight" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                <ul style="padding-left: 0; height:300px; overflow: scroll;">
+                                    <li><a href="">Arabind</a></li>
+                                    <li><a href="">Arifa Tur Rahman</a></li>
+                                    <li><a href="">Mousumi Reza</a></li>
+                                    <li><a href="`a">Mohammad Rayhan</a></li>
+                                    <li><a href="`a">Sufian</a></li>
+                                    <li><a href="`a">Arif Awal</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link HoverBtn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Courses Lists
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body overFlow">
+                                @{ int userid = Convert.ToInt32(Session["id"]);
+
+                                    var stdnt = new SDQWeb.Models.SDQEntities().Students.Where(a => a.UserId == userid).FirstOrDefault();
+                                    
+                                    if (stdnt !=null)
+                                    {
+                                        foreach (var item in stdnt.StudentCourses)
+                                        {
+                                            var course = new SDQWeb.Models.SDQEntities().Coursses.Where(a => a.Id == item.CourseId).FirstOrDefault();
+                                            <a href="~/Coursses/Details/@course.Id" class="dropdown-item">@course.Name</a>
+                                        }
+                                        <a href="~/StudentCourses/Create/" class="dropdown-item">Enroll New Course</a>
+                                    }
+                                    var teacher = new SDQWeb.Models.SDQEntities().Teachers.Where(a => a.UserId == userid).FirstOrDefault();
+                                    if (teacher != null)
+                                    {
+                                        foreach (var item in teacher.TeacherCourses)
+                                        {
+                                            var course = new SDQWeb.Models.SDQEntities().Coursses.Where(a => a.Id == item.CourseId).FirstOrDefault();
+                                            <a href="~/Coursses/Details/@course.Id" class="dropdown-item">@course.Name</a>
+                                        }
+                                        <a href="~/TeacherCourses/Create/" class="dropdown-item">Start A Course</a>
+                                        <a href="~/Coursses/Create/" class="dropdown-item">Add New Course</a>
+                                    }
+                                    
+                                            
+                                }
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Tasks
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <a href="" class="dropdown-item">Exam Schedules</a>
+                                <a href="" class="dropdown-item">Course Assignments</a>
+                                <a href="" class="dropdown-item">Term Reports</a>
+                                <a href="" class="dropdown-item">Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#MyNotes" aria-expanded="false" aria-controls="MyNotes">
+                                    My Notes
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="MyNotes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <a href="" class="dropdown-item">Notes</a>
+                                <a href="" class="dropdown-item">Files</a>
+                                <a href="" class="dropdown-item">Anoter Option</a>
+                                <a href="" class="dropdown-item">Add Note</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 ">
+            <div class="container MainBody">
+                @RenderBody()
+                <hr />
+                </div>
+            </div>
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
+    </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+
+
+            <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+            <script src="asset/js/bootstrap-material-design.js"></script>
+            <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+            <script src="~/Scripts/bootstrap-material-design.js"></script>
+</body>
+</html>

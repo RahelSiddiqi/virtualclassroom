@@ -1,0 +1,40 @@
+﻿@model SDQWeb.Models.UserInstitute
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserInstitute</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Institute Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Institute.Name)
+        </dd>
+
+        <dt>
+            Institute Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Institute.Address.Country.Name)
+        </dd>
+        <dt>
+            Institute WebSite
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Institute.WebSite)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

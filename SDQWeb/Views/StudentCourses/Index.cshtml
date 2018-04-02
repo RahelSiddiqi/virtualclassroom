@@ -1,0 +1,114 @@
+﻿@model IEnumerable<SDQWeb.Models.StudentCourse>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@{int stdid = Convert.ToInt32(Session["StudedntId"]);}
+@foreach (var item in Model)
+{
+    var course = new SDQWeb.Models.SDQEntities().Sessions.Where(s => s.CourseId == item.CourseId).FirstOrDefault();
+    var tcourse = new SDQWeb.Models.SDQEntities().TeacherCourses.Where(t => t.CourseId == item.CourseId).FirstOrDefault();
+
+    if (item.StudentId == stdid)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-1 ContentDiv">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
+                            <img src="default-profile.png" height="40" class="RoundedImage">
+                        </div>
+                        <div class="col-xs-6 col-sm-8 col-md-10 col-lg-11 border-bottom">
+                            <div class="row Informations">
+                                <h3 class="UserName"></h3>
+                            </div>
+                            <div class="row Informations">
+                                <h6>
+                                    <span><a href="">Lecturer</a></span>
+                                    <span><a href="">CSE</a></span>
+                                    <span><a href="">IUBAT</a></span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5>Session 1 : Life Cycle of Software Development</h5>
+                    </div>
+                    <div class="row Content">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe width="854" height="480" src="https://www.youtube.com/embed/LOLxYo23KLc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="row Content">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h5>Software Development Life Cycle – Can Possible for Everyone</h5>
+                            <div class="postmeta">
+                                <i class="fa fa-calendar"></i>
+                                <span>Tuesdat, December 13, 2017</span>
+                                <i class="fas fa-clock"></i>
+                                <span>12:37:00</span>
+                                <i class="fas fa-book"></i>
+                                <span>Software Engineering</span>
+                            </div>
+                            <!-- <div class="row imgPost">
+                                <img src="sdlc_vmodel.png" class="img-thumbnail">
+                            </div> -->
+                            <div class="row ContentPost border-bottom border-top">
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#CourseMaterials" aria-expanded="false" aria-controls="CourseMaterials">
+                                                Lecture Materials
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="CourseMaterials" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <a href="" class="dropdown-item">Download Video Class</a>
+                                            <a href="" class="dropdown-item">Download Lecture Sheet</a>
+                                            <a href="" class="dropdown-item">Get Presentation Files</a>
+                                            <a href="" class="dropdown-item">Add Note</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#Quiz" aria-expanded="false" aria-controls="Quiz">
+                                                Today's Quizes
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="Quiz" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <a href="" class="dropdown-item">Quiz One</a>
+                                            <a href="" class="dropdown-item">Quiz One</a>
+                                            <a href="" class="dropdown-item">Quiz One</a>
+                                            <a href="" class="dropdown-item">Quiz One</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    <span><a href=""><i class="fas fa-plug"></i> 33 Connected</a></span>
+                                    <span><a href=""><i class="fas fa-comment"></i> 13 Discussions</a></span>
+                                    <span>Share On <a href=""><i class="fab fa-facebook-square"></i></a></span>
+                                    <span><a href=""><i class="fab fa-twitter-square"></i></a></span>
+                                    <span><a href=""><i class="fab fa-google-plus-square"></i></a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+
+
+

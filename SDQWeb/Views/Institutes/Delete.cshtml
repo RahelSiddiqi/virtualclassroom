@@ -1,0 +1,88 @@
+﻿@model SDQWeb.Models.Institute
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Institute</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebSite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebSite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfDepertment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfDepertment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PresentAddress.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PresentAddress.Id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

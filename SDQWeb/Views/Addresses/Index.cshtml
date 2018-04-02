@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SDQWeb.Models.Address>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Add Your Address to Update Your Profile</h2>
+<div class="row justify-content-between">
+    <div class="col-lg-4">
+        <img class="rounded-circle" src="~/Image/Rahel.jpg" alt="image" width="140" height="140">
+        <h2>M. A. Aziz Siddiqi</h2>
+        <p>Student : Computer Science And Engineering</p>
+        <p>LICT</p>
+        <p>Instructor : Arabind</p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+    </div>
+    <div class="col-lg-4">
+        <img class="rounded-circle" src="~/Image/148255.jpg" alt="image" width="140" height="140">
+        <h2>Mousumi Reza</h2>
+        <p>Student : Computer Science And Engineering</p>
+        <p>LICT</p>
+        <p>Instructor : Arabind</p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Add Present Address", "Create")
+</p>
+

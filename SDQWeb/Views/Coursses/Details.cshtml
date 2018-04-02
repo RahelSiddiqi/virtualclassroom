@@ -1,0 +1,291 @@
+﻿@model SDQWeb.Models.Coursse
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="col-lg-12 imageBg">
+    <div class="row Course">
+        <!-- Sidebar navigation -->
+        <div class="col-lg-12">
+            <div class="row">
+                <h3 style="width: 100%; text-align: center; font-size: 33px; font-weight: bold;">@Html.DisplayFor(Model => Model.Name)</h3>
+            </div>
+        </div>
+        <div id="slide-out" class="col-lg-4 sn-bg-4" style="margin-top: -19px;">
+            @{ 
+                var tcourse = new SDQWeb.Models.SDQEntities().TeacherCourses.Where(t => t.CourseId == Model.Id).FirstOrDefault();
+                var tusr = new SDQWeb.Models.SDQEntities().Teachers.Where(u => u.Id == tcourse.TeacherId).FirstOrDefault();
+                var usr = new SDQWeb.Models.SDQEntities().Users.Where(a => a.ID == tusr.UserId).FirstOrDefault();
+                var tdept = new SDQWeb.Models.SDQEntities().TeacherDepertments.Where(a => a.TeacherId == tusr.Id).FirstOrDefault();
+
+
+            }
+            <ul class="CourseList">
+                <!-- Logo -->
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <a href="#">
+                            <img src="~/Image/@usr.Profile" width="100" class="img-thumbnail flex-center">
+                        </a>
+                    </div>
+                    <div class="logo-wrapper waves-light">
+
+                        <h5 style="margin-top: 13px;">@usr.FirstName @usr.LastName </h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <h5 style="margin-top: 13px;">@Html.DisplayFor(model => model.Name)</h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <h5 style="margin-top: 13px;"> Cradit Houres : @Html.DisplayFor(model => model.Cradit)</h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <h5 style="margin-top: 13px;">@Html.DisplayFor(model => model.Depertment.Name)</h5>
+                    </div>
+                </li>
+
+                <!--/. Logo -->
+                <!--Search Form-->
+                
+            </ul>
+        </div>
+        <div class="col-lg-8" style="margin-top: 10px;">
+            <div class="col" style="margin-top: 10px;">
+                <div class="row">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <abbr title="Description">
+                                <i class="fas fa-info-circle" style="font-size: 33px; color:white;"> </i>
+                            </abbr>
+                        </button>
+                        <div class="dropdown-menu InstractorProfile">
+                            <div class="UpdateForm">
+                                @Html.DisplayFor(model => model.Description)
+                            </div>
+                               
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <abbr title="Requirments" style="cursor: pointer;">
+                                <i class="fas fa-key " style="font-size: 33px; color:white;"></i>
+                            </abbr>
+                        </button>
+                        <div class="dropdown-menu InstractorProfile marginLeft30">
+                            <div class="UpdateForm">
+                                <div class="card-body" style="margin: 0; padding: 0; height: auto;">
+                                    @{ int tid = Convert.ToInt32(Session["TeacherId"]);}
+                                    @if (tid > 0)
+                                     {
+                                        <a href="~/Quises/Create" class="dropdown-item" style="margin:0;padding:0;">Add Quises</a>
+                                        <a href="~/SessionQuises/Create" class="dropdown-item" style="margin:0;padding:0;">Add Quises To Session</a>
+                                     }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <abbr title="Announcements" style="cursor: pointer;">
+                                <i class="fas fa-bullhorn" style="font-size: 33px; color:white;"></i>
+                            </abbr>
+                        </button>
+                        <div class="dropdown-menu InstractorProfile marginLeft60">
+                            <div class="UpdateForm">
+                                <div class="card-body">
+                                    @{
+                                        var ann = new SDQWeb.Models.SDQEntities().Announcements.Where(a => a.CourseId == Model.Id).ToList();
+                                        foreach (var item in ann)
+                                        {
+                                        <a href="~/Announcements/Details/@item.Id" class="dropdown-item" style="margin:0;padding:0;">@item.Topic</a>
+                                        }
+                                        if (tid > 0)
+                                        {
+                                        <a href="~/Announcements/Create/@Model.Id" class="dropdown-item" style="margin:0;padding:0;">Add Announcement</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <abbr title="Schedules" style="cursor: pointer;">
+                                <i class="far fa-calendar-alt" style="font-size: 33px; color:white;"></i>
+                            </abbr>
+                        </button>
+                        <div class="dropdown-menu InstractorProfile marginLeft90">
+                            <div class="UpdateForm">
+                                <div class="card-body">
+                                    @{
+                                        var sche = new SDQWeb.Models.SDQEntities().Schedules.Where(a => a.CourseId == Model.Id).ToList();
+                                        foreach (var item in sche)
+                                        {
+                                            <a href="~/Schedules/Details/@item.Id" class="dropdown-item" style="margin:0;padding:0;">@item.Name</a>
+                                        }
+                                        if (tid > 0)
+                                        {
+                                            <a href="~/Schedules/Create/@Model.Id" class="dropdown-item" style="margin:0;padding:0;">Add Schedules</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <abbr title="Previous Sections" style="cursor: pointer;">
+                                <i class="fas fa-history" style="font-size: 33px; color:white;"></i>
+                            </abbr>
+                        </button>
+                        <div class="dropdown-menu InstractorProfile marginLeft120">
+                            <ol>
+
+                                @{
+                            var prese = new SDQWeb.Models.SDQEntities().Sessions.Where(a => a.CourseId == Model.Id).ToList();
+                            foreach (var item in prese)
+                            {
+                            <li>
+                                <a href="~/Sessions/Details/@item.Id" class="dropdown-item" style="margin-right:0;padding:0;">@item.Name - @item.Date.ToLongDateString()</a>
+                            </li>
+                                }
+                                if (tid > 0)
+                                {
+                                   <a href="~/Sessions/Create/@Model.Id" class="dropdown-item" style="margin:0;padding:0;">Add Sessions</a>
+                                }
+                                }
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <abbr title="Actions" style="cursor: pointer;">
+                                <i class="fas fa-ellipsis-v" style="font-size: 33px; color:white;"></i>
+                            </abbr>
+                        </button>
+                        <div class="dropdown-menu InstractorProfile marginLeft150">
+                            <div class="UpdateForm">
+                                <div class="card-body">
+                                    <a href="" class="dropdown-item">Enroll This Course</a>
+                                    <a href="" class="dropdown-item">Apply For CR</a>
+                                    <a href="" class="dropdown-item">Another Options</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="container MainBody">
+        <div class="row">
+            
+                @foreach (var item in prese)
+                {
+            <div class="col-lg-12">
+                <div class="card card-1 ContentDiv">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
+                            <img src="~/Image/@usr.Profile" height="40" class="RoundedImage">
+                        </div>
+                        <div class="col-xs-6 col-sm-8 col-md-10 col-lg-11 border-bottom">
+                            <div class="row Informations">
+                                <h3 class="UserName">@usr.FirstName @usr.LastName</h3>
+                            </div>
+                            <div class="row Informations">
+                                <h6>
+                                    <span><a href="">Lecturer</a></span>
+                                    <span><a href="/Depertments/Details/@tdept.Depertment.Id">@tdept.Depertment.Name</a></span><br />
+                                    <span style="margin-top:10px;"><a href="">@tdept.Depertment.Institute.Name</a></span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5> @item.Name </h5>
+                    </div>
+                    <div class="row Content">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe width="854" height="480" src="@item.Video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="row Content">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h5>@item.Name </h5>
+                            <div class="postmeta">
+                                <i class="fa fa-calendar"></i>
+                                <span>@item.Date.ToLongDateString()</span>
+                                <i class="fas fa-clock"></i>
+                                <span>@item.Time</span>
+                                <i class="fas fa-book"></i>
+                                <span>@item.Coursse.Name</span>
+                            </div>
+                            <!-- <div class="row imgPost">
+                        <img src="sdlc_vmodel.png" class="img-thumbnail">
+                    </div> -->
+                            <div class="row ContentPost border-bottom border-top">
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#@item.Id" aria-expanded="false" aria-controls="@item.Id">
+                                                Lecture Materials
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="@item.Id" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <a href="@item.Material.VideoLink" class="dropdown-item">Watch The Session</a>
+                                            <a href="@item.Material.LectureSlide" class="dropdown-item">Download Lecture Sheet</a>
+                                            <a href="@item.Material.PresentationFile" class="dropdown-item">Get Presentation Files</a>
+                                            <a href="@item.Material.Notes" class="dropdown-item">Get Notes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#@item.Id@item.Id" aria-expanded="false" aria-controls="@item.Id@item.Id">
+                                                Today's Quizes
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="@item.Id@item.Id" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            @{ 
+                                                var quise = new SDQWeb.Models.SDQEntities().SessionQuises.Where(sq => sq.SessionId == item.Id);
+                                                foreach (var qs in quise)
+                                                {
+                                                    <a href="~/Quises/Details/@qs.Quise.Id" class="dropdown-item">@qs.Quise.Question</a>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    <span><a href=""><i class="fas fa-plug"></i> @item.Coursse.StudentCourses.Count Connected</a></span>
+                                    <span><a href=""><i class="fas fa-comment"></i> 13 Discussions</a></span>
+                                    <span>Share On <a href=""><i class="fab fa-facebook-square"></i></a></span>
+                                    <span><a href=""><i class="fab fa-twitter-square"></i></a></span>
+                                    <span><a href=""><i class="fab fa-google-plus-square"></i></a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                 }
+
+        </div>
+    </div>
+</div>

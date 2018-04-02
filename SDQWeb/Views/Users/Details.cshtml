@@ -1,0 +1,149 @@
+﻿@model SDQWeb.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+    <div class="container MarginTop">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                <div class="container MainBody">
+                    <div class="row" style="margin-top:-39px;">
+                        <div class="col-lg-12 imageBg">
+                            <div class="row Profile">
+                                <div class="col-lg-12 ">
+                                    <img class="img-fluid mb-5 d-block mx-auto" width="300" src="~/Image/@Model.Profile" alt="">
+                                    <h2 class="text-uppercase mb-0">@Model.FirstName @Model.LastName</h2>
+                                    <hr class="star-light">
+                                    <p class=" mb-0">
+                                        Student-@{try {
+                                                var ins = new SDQWeb.Models.SDQEntities().UserInstitutes.Where(i => i.UserId == Model.ID).FirstOrDefault();
+                                                var insName = new SDQWeb.Models.SDQEntities().Institutes.Find(ins.InstituteId);
+
+                                        @insName.Name
+                                        <br />
+                                        @insName.EstDate.ToLongDateString();
+                                                if (insName.Name == null)
+                                                {
+                                                    Response.RedirectToRoute("Index");
+                                                }
+                                            }
+                                            catch (Exception)
+                                            {
+
+                                            }
+
+                                            }
+                                    </p>
+                                    @Html.ActionLink("Add New Institute", "Create", "UserInstitutes")
+                                </div>    <!-- Sidebar navigation -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-1 ContentDiv">
+                                <div class="row Content">
+                                    <div class="col-xs-12 col-sm-128 col-md-12 col-lg-12">
+                                        <div class="row ProfileInfo">
+                                            <caption align="top"><h4>Personal Informations</h4></caption>
+                                            <table class="ContactInfo">
+                                                <tr>
+                                                    <td>First Name</td>
+                                                    <td>@Model.FirstName</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name</td>
+                                                    <td>@Model.LastName</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date Of Birth</td>
+                                                    <td> @Model.DateOfBirth.ToLongDateString()</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender</td>
+                                                    @if (Model.Gender == 1) { ViewBag.Gender = "Male"; } else { ViewBag.Gender = "Female"; }
+                                                    <td>@ViewBag.Gender</td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="row ProfileInfo">
+                                            <caption align="top"><h4>Contact Informations</h4></caption>
+                                            <table class="ContactInfo">
+                                                <tr>
+                                                    <td>Present Address</td>
+                                                    <td>
+                                                        @{var add = new SDQWeb.Models.SDQEntities().Addresses.Find(Model.AddressID);
+                                                            if (add == null)
+                                                            {
+                                                                
+                                                            }
+                                                            @add.Zip.State
+
+                                                            @add.Zip.City
+
+                                                            @add.Country.Name
+
+                                                        }
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>@Html.ActionLink("Edit Address", "Create", "Addresses")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Permanent Address</td>
+                                                    <td>
+                                                        @{var padd = new SDQWeb.Models.SDQEntities().Addresses.Find(Model.PresentAddressId);
+                                                        }
+                                                        @padd.Zip.State
+
+                                                        @padd.Zip.City
+
+                                                        @padd.Country.Name
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact No</td>
+                                                    <td>+880 @Model.MobileNo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Country</td>
+                                                    <td>@padd.Country.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Staying</td>
+                                                    <td>@padd.Zip.City</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function dostuff() {
+            if (document.getElementById('NameField').style.display == "none") {
+
+                document.getElementById('NameField').setAttribute("style", "display:block; transition:  height 4s;transition-timing-function: ease-in-out; background-color:red;");
+                document.getElementById('NameFieldButton').setAttribute("style", "display:none; transition:  height 4s;transition-timing-function: ease-in-out;");           }
+            else {
+                document.getElementById('NameField').setAttribute("style", "display:none; transition: all 2s;");
+             }
+        }
+    </script>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

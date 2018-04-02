@@ -1,0 +1,177 @@
+﻿@model IEnumerable<SDQWeb.Models.Session>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@{int stdid = Convert.ToInt32(Session["StudedntId"]);}
+@foreach (var item in Model)
+{
+    var scourse = new SDQWeb.Models.SDQEntities().StudentCourses.Where(t => t.StudentId == stdid).FirstOrDefault();
+    var course = new SDQWeb.Models.SDQEntities().Sessions.Where(s => s.CourseId == item.CourseId).FirstOrDefault();
+    var tcourse = new SDQWeb.Models.SDQEntities().TeacherCourses.Where(t => t.CourseId == item.CourseId).FirstOrDefault();
+    
+    if (item.CourseId == scourse.CourseId)
+    {
+        <div class="col-lg-12">
+            <div class="card card-1 ContentDiv">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
+                        <img src="~/Image/@tcourse.Teacher.User.Profile" height="40" class="RoundedImage">
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-10 col-lg-11 border-bottom">
+                        <div class="row Informations">
+                            <h3 class="UserName">@tcourse.Teacher.User.FirstName @tcourse.Teacher.User.LastName</h3>
+                        </div>
+                        <div class="row Informations">
+                            <h6>
+                                <span><a href="">Lecturer</a></span>
+                                <span><a href="/Depertments/Details/@course.Coursse.Depertment.Id">@course.Coursse.Depertment.Name</a></span><br />
+                                <span style="margin-top:10px;"><a href="">@course.Coursse.Depertment.Institute.Name</a></span>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5> @item.Name </h5>
+                </div>
+                <div class="row Content">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe width="854" height="480" src="@item.Video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="row Content">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h5>@item.Name </h5>
+                        <div class="postmeta">
+                            <i class="fa fa-calendar"></i>
+                            <span>@item.Date.ToLongDateString()</span>
+                            <i class="fas fa-clock"></i>
+                            <span>@item.Time</span>
+                            <i class="fas fa-book"></i>
+                            <span>@item.Coursse.Name</span>
+                        </div>
+                        <!-- <div class="row imgPost">
+                            <img src="sdlc_vmodel.png" class="img-thumbnail">
+                        </div> -->
+                        <div class="row ContentPost border-bottom border-top">
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#@item.Id" aria-expanded="false" aria-controls="@item.Id">
+                                            Lecture Materials
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="@item.Id" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <a href="@item.Material.VideoLink" class="dropdown-item">Watch The Session</a>
+                                        <a href="@item.Material.LectureSlide" class="dropdown-item">Download Lecture Sheet</a>
+                                        <a href="@item.Material.PresentationFile" class="dropdown-item">Get Presentation Files</a>
+                                        <a href="@item.Material.Notes" class="dropdown-item">Get Notes</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed HoverBtn" data-toggle="collapse" data-target="#@item.Id@item.Id" aria-expanded="false" aria-controls="@item.Id@item.Id">
+                                            Today's Quizes
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="@item.Id@item.Id" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        @{
+                                            var quise = new SDQWeb.Models.SDQEntities().SessionQuises.Where(sq => sq.SessionId == item.Id);
+                                            foreach (var qs in quise)
+                                            {
+                                                <a href="~/Quises/Details/@qs.Quise.Id" class="dropdown-item">@qs.Quise.Question</a>
+    }
+}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>
+                                <span><a href=""><i class="fas fa-plug"></i> @item.Coursse.StudentCourses.Count Connected</a></span>
+                                <span><a href=""><i class="fas fa-comment"></i> 13 Discussions</a></span>
+                                <span>Share On <a href=""><i class="fab fa-facebook-square"></i></a></span>
+                                <span><a href=""><i class="fab fa-twitter-square"></i></a></span>
+                                <span><a href=""><i class="fab fa-google-plus-square"></i></a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Video)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuiseId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coursse.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Material.LectureSlide)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Video)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuiseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coursse.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material.LectureSlide)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
