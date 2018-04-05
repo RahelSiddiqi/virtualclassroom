@@ -11,16 +11,22 @@ namespace SDQWeb.Controllers
     {
         public ActionResult Index(int id)
         {
+
             int tid = Convert.ToInt32(Session["TeacherId"]);
             if (tid > 0)
             {
                 return RedirectToAction("Index", new { controller = "TeacherCourses", action = "Index", id });
             }
             var stdnt = new SDQWeb.Models.SDQEntities().Students.Where(a => a.UserId == id).FirstOrDefault();
-            if (stdnt == null)
+
+            if (stdnt != null)
             {
-                return RedirectToAction("Create", new { controller = "Students", action = "Create",id });
+                if (stdnt.Id > 0)
+                {
+                    return RedirectToAction("Create", new { controller = "Students", action = "Create",id });
+                }
             }
+            
             Home home = new Home();
             
             using(SDQEntities sdq = new SDQEntities())

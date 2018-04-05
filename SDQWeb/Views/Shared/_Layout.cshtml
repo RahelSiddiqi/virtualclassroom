@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title -SDQ</title>
 
     <!-- fonts for menu -->
     <link href="https://fonts.googleapis.com/css?family=Vollkorn:400,700" rel="stylesheet">
@@ -24,7 +24,7 @@
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav bd-navbar-nav flex-row">
                 <li class="nav-item">
-                    <a class="nav-link active" href="home.html">Home</a>
+                    <a class="nav-link active" href="~/Home/Index/@Convert.ToInt32(Session["id"])">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="">Campus</a>

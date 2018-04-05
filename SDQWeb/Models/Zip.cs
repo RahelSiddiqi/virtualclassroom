@@ -11,7 +11,8 @@ namespace SDQWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Zip
     {
         public Zip()
@@ -19,7 +20,7 @@ namespace SDQWeb.Models
             this.Addresses = new HashSet<Address>();
             this.PresentAddresses = new HashSet<PresentAddress>();
         }
-    
+        [Key]
         public int ZipCode { get; set; }
         public string City { get; set; }
         public string State { get; set; }

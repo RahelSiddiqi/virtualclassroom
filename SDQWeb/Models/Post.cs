@@ -11,6 +11,10 @@ namespace SDQWeb.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Runtime.InteropServices;
+
     
     public partial class Post
     {
@@ -18,12 +22,14 @@ namespace SDQWeb.Models
         {
             this.Discussions = new HashSet<Discussion>();
         }
-    
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
         public string Descriptions { get; set; }
         public int UserId { get; set; }
+       
     
         public virtual ICollection<Discussion> Discussions { get; set; }
         public virtual User User { get; set; }

@@ -10,19 +10,17 @@
 namespace SDQWeb.Models
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.ModelConfiguration.Conventions;
+
     public partial class SDQEntities : DbContext
     {
         public SDQEntities()
             : base("name=SDQEntities")
         {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
         }
     
         public DbSet<Address> Addresses { get; set; }
@@ -47,12 +45,18 @@ namespace SDQWeb.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
         public DbSet<StudentDepertment> StudentDepertments { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherCourse> TeacherCourses { get; set; }
         public DbSet<TeacherDepertment> TeacherDepertments { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserInstitute> UserInstitutes { get; set; }
         public DbSet<Zip> Zips { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
+    
 }

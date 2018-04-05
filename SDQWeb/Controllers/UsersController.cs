@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -113,7 +114,7 @@ namespace SDQWeb.Controllers
             {
                db.Users.Find(user.ID).AddressID = user.AddressID;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create",new { Controller="PresentAddresses", Action= "Create"});
             }
             return View();
         }
@@ -143,7 +144,7 @@ namespace SDQWeb.Controllers
                 db.SaveChanges();
 
             }
-            return View();
+            return RedirectToAction("Index", new { Controller = "Home", Action = "Index", id = Convert.ToInt32(Session["id"]) });
         }
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
@@ -180,7 +181,53 @@ namespace SDQWeb.Controllers
             return View(user);
         }
 
+        //GET Users/UploadProfile/id
+        public ActionResult UploadProfile(int id)
+        {
+            if (id <= 0 )
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult UploadProfile([Bind(Include = "ID,FirstName,LastName,Email,MobileNo,DateOfBirth,Gender,Password,PresentAddressId,AddressID,Profile")] User user)
+        {
+            var path = "";
+            HttpPostedFileBase file = Request.Files["Profile"];
+            if (file != null)
+            {
+                if (file.ContentLength > 0)
+                {
+                    string ext = Path.GetExtension(file.FileName).ToLower();
+                    if ( ext.Contains("jpg") || ext.Contains("jpeg") || ext.Contains("gif") || ext.Contains("png"))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            db.Users.Find(user.ID).Profile = Path.GetFileName(file.FileName);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ViewBag.img = "{Profile Uploaded Failed";
+                            return View(user);
+                        }
+                        path = Path.Combine(Server.MapPath("~/Image/"),file.FileName);
+                        file.SaveAs(path);
+                        ViewBag.img = "Profile Uploaded Successfully! will Change Next Login";
+                        return View(user);
+                    }
+                }
+            }
+            return View();
+        }
         // GET: Users/Delete/5
+        [NonAction]
         public ActionResult Delete(int? id)
         {
             if (id == null)

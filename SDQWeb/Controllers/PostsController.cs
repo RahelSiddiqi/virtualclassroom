@@ -60,7 +60,6 @@ namespace SDQWeb.Controllers
             ViewBag.UserId = new SelectList(db.Users, "ID", "FirstName", post.UserId);
             return View(post);
         }
-
         // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -76,7 +75,11 @@ namespace SDQWeb.Controllers
             ViewBag.UserId = new SelectList(db.Users, "ID", "FirstName", post.UserId);
             return View(post);
         }
-
+        [NonAction]
+        public ActionResult Update(int? id)
+        {
+            return View();
+        }
         // POST: Posts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -95,6 +98,7 @@ namespace SDQWeb.Controllers
         }
 
         // GET: Posts/Delete/5
+        [NonAction]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +116,7 @@ namespace SDQWeb.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [NonAction]
         public ActionResult DeleteConfirmed(int id)
         {
             Post post = db.Posts.Find(id);

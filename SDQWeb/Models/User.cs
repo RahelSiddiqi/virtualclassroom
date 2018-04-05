@@ -11,7 +11,9 @@ namespace SDQWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class User
     {
         public User()
@@ -23,7 +25,9 @@ namespace SDQWeb.Models
             this.Teachers = new HashSet<Teacher>();
             this.UserInstitutes = new HashSet<UserInstitute>();
         }
-    
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

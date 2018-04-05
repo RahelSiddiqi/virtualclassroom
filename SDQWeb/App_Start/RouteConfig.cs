@@ -18,16 +18,6 @@ namespace SDQWeb
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Main", action = "Index", id = UrlParameter.Optional }
             );
-            routes.MapRoute(
-                  name: "PresentAdd", 
-                  url: "{controller}/{action}/{id}",
-                  defaults: new { controller = "Users", action = "ViewAdd", UrlParameter.Optional }
-                );
-            routes.MapRoute(
-                  name: "AddCourse",
-                  url: "{controller}/{action}/{id}",
-                  defaults: new { controller = "StudentCourses", action = "Create", UrlParameter.Optional }
-                );
         }
     }
 }

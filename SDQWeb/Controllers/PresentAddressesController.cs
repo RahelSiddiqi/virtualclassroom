@@ -17,8 +17,7 @@ namespace SDQWeb.Controllers
         // GET: PresentAddresses
         public ActionResult Index()
         {
-            var presentAddresses = db.PresentAddresses.Include(p => p.Country).Include(p => p.Zip);
-            return View(presentAddresses.ToList());
+            return RedirectToAction("Create");
         }
 
         // GET: PresentAddresses/Details/5

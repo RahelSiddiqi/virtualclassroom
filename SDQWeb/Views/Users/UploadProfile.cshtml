@@ -1,0 +1,18 @@
+﻿@model SDQWeb.Models.User
+
+@{
+    ViewBag.Title = "UploadProfile";
+}
+
+<h2>Update Your Profile Picture</h2>
+
+<div class="alert-success">
+    @ViewBag.img
+</div>
+@using (Html.BeginForm("UploadProfile", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <img src="~/Image/@Session["image"]" alt="Alternate Text"  width="300"/><br />
+    <input type="file" name="Profile" value="" placeholder="Profile Picture"  style="padding:3px"/> <br />
+    <input type="submit" name="submit" value="Upload Profile Picture" class="btn btn-success" />
+}
+
