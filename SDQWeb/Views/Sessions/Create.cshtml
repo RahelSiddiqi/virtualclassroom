@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h3>Create New Sessions For this Subject</h3>
+<h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,11 +12,11 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <p>Dont add any Materials for this session ?<a href="~/Materials/Create/">Add Materials First</a></p>
+        <h4>Session</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name,"Session Title", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Video, "Embaded Link", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Video, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Video, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
@@ -32,9 +32,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaterialsId, "Materials Address", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MaterialsId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaterialsId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.MaterialsId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MaterialsId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,13 +56,27 @@
         </div>
 
         <div class="form-group">
-            @{int quiseId = Convert.ToInt16(Session["id"]);}
-            <input type="hidden" name="QuiseId" value="@quiseId" />
-            
+            @Html.LabelFor(model => model.QuiseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuiseId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuiseId, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
-            <input type="hidden" name="CourseId" value="0" />
+            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CourseId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Coursse_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Coursse_Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Coursse_Id, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">

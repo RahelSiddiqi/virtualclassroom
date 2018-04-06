@@ -53,21 +53,17 @@ namespace SDQWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Depertments.Add(depertment);
-                depertment.AddressId = 1;
+                
+                depertment.AddressId = 2;
                 try
                 {
+                    db.Depertments.Add(depertment);
                     db.SaveChanges();
                 }
                 catch (Exception)
                 {
                     ViewBag.ErrMsg = "Filed Need to Fillup All";
                     return RedirectToAction("Create");
-                }
-                
-                if (db.StudentDepertments.Count() == 0)
-                {
-                    return RedirectToAction("Create", new { Controller = "StudentDepertments", Action = "Create" });
                 }
                 
             }

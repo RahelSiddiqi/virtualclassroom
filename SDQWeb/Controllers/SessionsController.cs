@@ -61,7 +61,7 @@ namespace SDQWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Video,MaterialsId,Date,Time,QuiseId,CourseId")] Session session,int id)
+        public ActionResult Create([Bind(Include = "Id,Name,Video,MaterialId,Date,Time,QuiseId,CourseId")] Session session,int id)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +70,7 @@ namespace SDQWeb.Controllers
                 session.Material_id = session.MaterialsId;
                 db.Sessions.Add(session);
                 db.SaveChanges();
+                var nwswssion = new SDQWeb.Models.SDQEntities().Sessions.Where(s => s.CourseId == session.CourseId);
                 return RedirectToAction("Index");
             }
 
