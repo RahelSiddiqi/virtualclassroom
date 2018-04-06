@@ -19,7 +19,7 @@ namespace SDQWeb.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Address).Include(u => u.PresentAddress);
+            var users = db.Users.Include(u => u.Address).Include(u => u.PresentAddress).Include(u=>u.UserInstitutes).Include(u => u.Posts).Include(u => u.Teachers).Include(u => u.Discussions).Include(u => u.Students);
             return View(users.ToList());
         }
 
@@ -31,6 +31,10 @@ namespace SDQWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Main");
+            }
             ViewBag.UserName = user.FirstName + " " + user.LastName;
             ViewBag.Image = user.Profile;
             ViewBag.Id = user.ID;
@@ -80,6 +84,7 @@ namespace SDQWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Profile = "defaultprofile.png";
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Login", "Main");

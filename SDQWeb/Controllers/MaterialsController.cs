@@ -50,6 +50,11 @@ namespace SDQWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (material.LectureSlide == null || material.LectureSlide == "" || material.PresentationFile == null || material.PresentationFile == "" || material.Notes == null || material.Notes == "")
+                {
+                    ViewBag.ErrMsg = "Provide All Informations Please";
+                    return View(material);
+                }
                 db.Materials.Add(material);
                 db.SaveChanges();
                 return RedirectToAction("Index");

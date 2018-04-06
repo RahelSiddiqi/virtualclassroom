@@ -77,10 +77,14 @@ namespace SDQWeb.Controllers
             }
             
             var std = db.Students.Where(t => t.UserId == userid).FirstOrDefault();
-            if (std.StudentDepertments.Count() == 0)
+            if (std != null)
             {
-                return RedirectToAction("Create", new { controller = "StudentDepertments", action = "Create", id = std.UserId });
+                if (std.StudentDepertments.Count() == 0)
+                {
+                    return RedirectToAction("Create", new { controller = "StudentDepertments", action = "Create", id = std.UserId });
+                }
             }
+            
             ViewBag.DepertmentId = new SelectList(db.Depertments, "Id", "Name");
             return View();
         }

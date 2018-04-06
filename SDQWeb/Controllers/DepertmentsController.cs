@@ -54,8 +54,22 @@ namespace SDQWeb.Controllers
             if (ModelState.IsValid)
             {
                 db.Depertments.Add(depertment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                depertment.AddressId = 1;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    ViewBag.ErrMsg = "Filed Need to Fillup All";
+                    return RedirectToAction("Create");
+                }
+                
+                if (db.StudentDepertments.Count() == 0)
+                {
+                    return RedirectToAction("Create", new { Controller = "StudentDepertments", Action = "Create" });
+                }
+                
             }
 
             ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Id", depertment.AddressId);

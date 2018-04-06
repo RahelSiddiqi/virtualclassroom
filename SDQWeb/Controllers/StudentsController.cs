@@ -53,8 +53,17 @@ namespace SDQWeb.Controllers
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);
-                db.SaveChanges();
-                Session["StudedntId"] = student.Id;
+                try
+                {
+                     db.SaveChanges();
+                     Session["StudedntId"] = student.Id;
+                }
+                catch (Exception)
+                {
+                    ViewBag.ErrMsg = "Process Failed! Your Session is Over Please ReLogin";
+                    return View();
+                }
+               
                 return RedirectToAction("Create",new { Controller = "StudentDepertments", Action = "Create"});
             }
 

@@ -40,6 +40,10 @@ namespace SDQWeb.Controllers
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Coursses, "Id", "Name");
+            if (ViewBag.CourseId == null)
+            {
+                return RedirectToAction("Create", "Coursses");
+            }
             ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "Id");
             return View();
         }
@@ -53,9 +57,13 @@ namespace SDQWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TeacherCourses.Add(teacherCourse);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (teacherCourse.CourseId >0)
+                {
+                    db.TeacherCourses.Add(teacherCourse);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(teacherCourse);
             }
 
             ViewBag.CourseId = new SelectList(db.Coursses, "Id", "Name", teacherCourse.CourseId);

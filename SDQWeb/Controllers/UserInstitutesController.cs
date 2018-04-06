@@ -55,10 +55,10 @@ namespace SDQWeb.Controllers
             if (ModelState.IsValid)
             {
                 db.UserInstitutes.Add(userInstitute);
-                if (db.UserInstitutes.Where(ui => ui.UserId == userInstitute.UserId).FirstOrDefault() == null)
-                    return RedirectToAction("Details", new { Controller = "Users", Action = "Details", userInstitute.Id });
+                if (db.UserInstitutes.Where(ui => ui.UserId == userInstitute.UserId).FirstOrDefault() !=null)
+                    return RedirectToAction("Index", new { Controller = "Institutes", Action = "Index",id= userInstitute.UserId });
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { Controller = "Institutes", Action = "Index" });
             }
 
             ViewBag.InstituteId = new SelectList(db.Institutes, "Id", "Name", userInstitute.InstituteId);

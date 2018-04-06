@@ -14,6 +14,8 @@ namespace SDQWeb.Models
     
     public partial class Session
     {
+       
+
         public Session()
         {
             this.SessionQuises = new HashSet<SessionQuise>();
@@ -27,7 +29,9 @@ namespace SDQWeb.Models
         public System.TimeSpan Time { get; set; }
         public int QuiseId { get; set; }
         public int CourseId { get; set; }
-    
+        public int Coursse_Id { get; set; }
+        internal int Material_id { get; set; }
+
         public virtual Coursse Coursse { get; set; }
         public virtual Material Material { get; set; }
         public virtual ICollection<SessionQuise> SessionQuises { get; set; }

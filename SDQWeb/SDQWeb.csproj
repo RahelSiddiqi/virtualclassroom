@@ -181,6 +181,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804061154120_InitialCreate.cs" />
+    <Compile Include="Migrations\201804061154120_InitialCreate.Designer.cs">
+      <DependentUpon>201804061154120_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -230,6 +235,8 @@
     <Content Include="Image\defaultprofile.png" />
     <Content Include="Image\home.jpg" />
     <Content Include="Image\Rahel.jpg" />
+    <Content Include="Image\student.gif" />
+    <Content Include="Image\teacher.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -427,6 +434,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804061154120_InitialCreate.resx">
+      <DependentUpon>201804061154120_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

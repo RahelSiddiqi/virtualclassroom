@@ -66,6 +66,8 @@ namespace SDQWeb.Controllers
             if (ModelState.IsValid)
             {
                 session.CourseId = id;
+                session.Coursse_Id = id;
+                session.Material_id = session.MaterialsId;
                 db.Sessions.Add(session);
                 db.SaveChanges();
                 return RedirectToAction("Index");

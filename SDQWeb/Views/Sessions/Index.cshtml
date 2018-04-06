@@ -12,11 +12,19 @@
 @{int stdid = Convert.ToInt32(Session["StudedntId"]);}
 @foreach (var item in Model)
 {
+    int coid = 0;
     var scourse = new SDQWeb.Models.SDQEntities().StudentCourses.Where(t => t.StudentId == stdid).FirstOrDefault();
     var course = new SDQWeb.Models.SDQEntities().Sessions.Where(s => s.CourseId == item.CourseId).FirstOrDefault();
     var tcourse = new SDQWeb.Models.SDQEntities().TeacherCourses.Where(t => t.CourseId == item.CourseId).FirstOrDefault();
-    
-    if (item.CourseId == scourse.CourseId)
+    if (scourse != null)
+    {
+        coid = scourse.CourseId;
+    }
+    else if(tcourse != null)
+    {
+        coid = tcourse.CourseId;
+    }
+    if (item.CourseId == coid)
     {
         <div class="col-lg-12">
             <div class="card card-1 ContentDiv">

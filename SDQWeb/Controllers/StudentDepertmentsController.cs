@@ -53,6 +53,13 @@ namespace SDQWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                int id = Convert.ToInt32(Session["id"]);
+                var stdnt = db.Students.Where(st => st.UserId == id).FirstOrDefault();
+                if (stdnt == null)
+                {
+                    return RedirectToAction("Create", new { Controller = "Students", Action = "Create" });
+                }
+                studentDepertment.StudentId = stdnt.Id;
                 db.StudentDepertments.Add(studentDepertment);
                 db.SaveChanges();
                 return RedirectToAction("Index","Users");

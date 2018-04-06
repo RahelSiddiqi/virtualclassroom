@@ -3,74 +3,62 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="row">
+    <div class="col-md-6">
+        <h2>Student</h2>
+        <ol>
+            <li>Access to coursework from anywhere at any time</li>
+            <li>Combination of structure and freedom </li>
+            <li>Effective time management </li>
+            <li>Immediate feedback on tests</li>
+            <li>Asynchronous discussions with classmates  </li>
+            <li>Sharpened digital skills  </li>
+        </ol>
+        <p><a class="btn btn-secondary" href="~/UserInstitutes/Create" role="button">Start As Student »</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2>Teacher</h2>
+        <ul>
+            <li>Provide Class Materials</li>
+            <li>Schedules and Routines</li>
+            <li>Quieses And Courses</li>
+            <li>Easy to Manage Classes</li>
+            <li>Improve the Teaching Experiences</li>
+            <li>Connected To Every Students</li>
+        </ul>
+        <p><a class="btn btn-secondary" href="~/TeacherDepertments/Create" role="button">Start As Teacher »</a></p>
+    </div>
+</div>
+<div class="col-md-4">
 
-<h2>Index</h2>
+</div>
 
-<p>
-    @Html.ActionLink("As Student", "Create", "Students")
-    @Html.ActionLink("As Teacher", "Create", "Teachers")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WebSite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContactId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfDepertment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PresentAddress.Id)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WebSite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfDepertment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PresentAddress.Id)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+
+    @foreach (var item in Model)
+    {
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header" style="height:auto;">
+                <h4 class="font-weight-normal">@Html.DisplayFor(modelItem => item.Name)</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>
+                        @if (item.TypeId == 0)
+        {
+                <h3>University</h3>
+}
+                    </li>
+                    <li>Estd : @item.EstDate.ToLongDateString()</li>
+                    <li>Depertments : @Html.DisplayFor(modelItem => item.NumberOfDepertment)</li>
+                    <li>Contact to : @Html.DisplayFor(modelItem => item.ContactId)</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Web Site</button>
+            </div>
+        </div>
+    </div>
+
+
 }
 
-</table>
