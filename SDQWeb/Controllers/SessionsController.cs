@@ -70,7 +70,7 @@ namespace SDQWeb.Controllers
                 session.Material_id = session.MaterialsId;
                 db.Sessions.Add(session);
                 db.SaveChanges();
-                var nwswssion = new SDQWeb.Models.SDQEntities().Sessions.Where(s => s.CourseId == session.CourseId);
+                var nwswssion = db.Sessions.Where(s => s.CourseId == session.CourseId);
                 return RedirectToAction("Index");
             }
 
